@@ -5,16 +5,14 @@ const int N = 2005;
 
 int n;
 
+// First way
 set<int> a[N];
-
-int main(){
-    ios_base::sync_with_stdio(0); cin.tie(0);
-
+void firstWay(){
     cin >> n;
 
     if(n == 1){
         cout << "ANSWER 1" << endl;
-        return 0;
+        return;
     }
     for(int i = 1; i <= n; i++){
         for(int j = n + 1; j <= 2 * n; j++){
@@ -32,7 +30,7 @@ int main(){
                 cout << " " << *a[i].begin();
             }
             cout << endl;
-            return 0;
+            return;
         }
         set<int> query;
         for(int i = 0; i < s.size(); i++){
@@ -85,5 +83,52 @@ int main(){
             }
         }
     }
+}
 
+// Second way
+// Best solution
+int bit[1005][35];
+int ans[1005];
+void secondWay(){
+    cin >> n;
+
+    int cntQuery = log2(n);
+
+    for(int t = 0; t <= cntQuery; t++){
+
+        vector<int> ask;
+        for(int i = 1; i <= n; i++){
+            if(i >> t & 1) ask.push_back(i);
+        }
+
+        // ASK
+        cout << "ASK "; cout << ask.size() << " "; for(int it: ask) cout << it << " ";
+        cout << endl;
+
+        // READ
+        for(int i = 1; i <= ask.size(); i++){
+            int x; cin >> x;
+            bit[x][t] = 1;
+        }
+    }
+
+    // Caculate
+    for(int i = 1; i <= n; i++){
+        for(int t = 0; t <= cntQuery; t++){
+            ans[i] += bit[i][t] << t;
+        }
+    }
+
+    // ANSWER
+    cout << "ANSWER ";
+    for(int i = 1; i <= n; i++){
+        cout << ans[i] << " ";
+    }
+    cout << endl;
+}
+
+
+int main(){
+    ios_base::sync_with_stdio(0); cin.tie(0);
+    secondWay();
 }
