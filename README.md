@@ -24,3 +24,8 @@
 [Link problems](https://github.com/nqhhoang2002/Training-ACM-ICPC/tree/master/AlgoBootcamp%20-%20Round%202021-004/Problems)
 
 [Link code](https://github.com/nqhhoang2002/Training-ACM-ICPC/tree/master/AlgoBootcamp%20-%20Round%202021-004)
+
+## The 2018 ICPC Asia Hanoi Regional Contest
+[Link contest](https://open.kattis.com/problem-sources/The%202018%20ICPC%20Asia%20Hanoi%20Regional%20Contest)
+
+[Code](https://github.com/nqhhoang2002/Training-ACM-ICPC/tree/master/The%202018%20ICPC%20Asia%20Hanoi%20Regional%20Contest)
