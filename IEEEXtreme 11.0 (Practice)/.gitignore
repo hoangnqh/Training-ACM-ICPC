@@ -1,0 +1,6 @@
+*.o
+*.exe
+*.txt
+*.inp
+*.out
+Quipu Function.cpp
