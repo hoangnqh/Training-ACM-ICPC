@@ -1,39 +1,49 @@
-#include <bits/stdc++.h>
-
-
+#include<bits/stdc++.h>
 using namespace std;
-
-const int maxn = 1e3+5;
-
-int w,n;
-int val[maxn];
-int wt[maxn];
-
-int solve(){
-    int dp[w+1];
-    memset(dp,0,sizeof dp);
-
-    for(int i = 1; i < n +1; i++){
-        for(int j = w; j >= 0; j--){
-            if(wt[i-1] <= j){
-                dp[j] = max(dp[j],dp[j - wt[i-1]] + val[i-1]);
+#define int long long 
+#define fi first 
+#define se second 
+#define mp make_pair 
+#define pb push_back 
+typedef pair<int, int >ii;
+typedef pair<int, ii> iii;
+const int INF = 1e9;
+const int MOD = 1e9 + 7;
+const int N = 2e5 + 5;
+void solve() {
+    int c, n;
+    cin >> c >> n;
+    int d[n + 1][c + 1];
+    ii a[n + 1];
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i].fi >> a[i].se;
+    }
+    for (int i = 0; i <= c; i++) {
+        d[0][i] = 0;
+    }
+    for (int i = 0; i <= n; i++) {
+        d[i][0] = 0;
+    }
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= c; j++) {
+            if (a[i].fi <= j) {
+                d[i][j] = max(d[i - 1][j], d[i - 1][j - a[i].fi] + a[i].se);
             }
+            else d[i][j] = d[i - 1][j];
         }
     }
+    cout << d[n][c] << '\n';
 
-    return dp[w];
 }
+int32_t main() {
 
-int main(){
-    int t;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    int t = 1;
     cin >> t;
-    while(t--){
-       cin >> w >> n;
-       for(int i = 0; i < n; i++){
-            cin >> wt[i] >> val[i];
-       }
-
-       cout << solve() << endl;
+    while (t--) {
+        solve();
     }
-
 }

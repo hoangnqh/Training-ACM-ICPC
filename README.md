@@ -2,7 +2,7 @@
 
 ## Member in NDer team
 1. Nguyễn Quốc Huy Hoàng [Codeforces](https://codeforces.com/profile/Demon-Slayer)
-2. Lê Nguyễn Khánh Nam 
+2. Lê Nguyễn Khánh Nam [Codeforces](https://codeforces.com/profile/maphum)
 3. Lương Triều Vỹ
 
 ## Team achievements
