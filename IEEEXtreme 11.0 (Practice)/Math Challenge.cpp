@@ -25,10 +25,9 @@ int inv(int a, int m){
     return power(a, m - 2, m);
 }
 
-// Chinese Remainder Theory
+// Chinese Remainder Theorem
 int CRT(vector<pair<int, int> > x){
     int prod = 1;
-    int k = x.size();
     for (int i = 0; i < x.size(); i++)
         prod *= x[i].first;
 
@@ -42,8 +41,8 @@ int CRT(vector<pair<int, int> > x){
 
 int nCr(int n, int r, int pos){
     if(r > n) return 0;
-    int inv1 = power(gt[pos][r], P[pos] - 2, P[pos]);
-    int inv2 = power(gt[pos][n - r], P[pos] - 2, P[pos]);
+    int inv1 = inv(gt[pos][r], P[pos]);
+    int inv2 = inv(gt[pos][n - r], P[pos]);
     return (((gt[pos][n] * inv1) % P[pos]) * inv2) % P[pos];
 }
 
@@ -56,7 +55,7 @@ vector<int> getDigit(int N, int M) {
     return res;
 }
 
-// Lucas Theory
+// Lucas Theorem
 int nCr_Lucas(int N, int K, int M){
     vector<int> n = getDigit(N, M);
     vector<int> k = getDigit(K, M);
