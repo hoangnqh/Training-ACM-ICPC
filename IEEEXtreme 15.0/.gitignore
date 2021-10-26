@@ -1,0 +1,10 @@
+*.o
+*.exe
+*.txt
+*.inp
+*.out
+Image Convolution.cpp
+Candy Shop.cpp
+Xtreme Teams.cpp
+Xtreme Teleportation.cpp
+The Tortoise and The Hare.cpp
