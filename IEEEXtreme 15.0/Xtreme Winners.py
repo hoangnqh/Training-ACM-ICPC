@@ -1,0 +1,1 @@
+print('m psaSprATgsraUsmNmEtedCCoor'.index(input()[3:5])//2+1)
