@@ -1,150 +1,127 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-#define next dsfdsf
-#define right asgkjas
-#define int long long
-
 #define fi first
 #define se second
 #define pb push_back
 #define mp make_pair
-#define ld long double
 
 typedef pair<int, int> II;
 typedef pair<int, II> III;
 
-int dx[] = {0, 1, 0, -1};
-int dy[] = {1, 0, -1, 0};
-
-const int INF = 1e18;
-const int MOD = 1e9 + 7;
-const int N = 1e5 + 5;
-
+int len;
 string s;
-int n, query;
-string t[20000 + 5];
-vector<III> q[500 + 5];
+int n, Q;
+string t[20004];
+vector<III> fr[502];
+II ed[20004];
+int res[300005];
 
-int res[300000 + 5];
-
-int next[500 + 5][26 + 5];
-II right[20000 + 5];
-
-int st[4 * (20000 + 5)];
+int st[4 * 20004];
 
 void initST(){
-    for(int id = 1; id <= 4 * n; id++){
-        st[id] = 0;
+    for(int i = 1; i <= 4 * 20000; i++){
+        st[i] = 0;
     }
 }
 
-void update(int id, int l, int r, int pos){
-    if(pos < l || pos > r) return;
-    if(l == r){
-        st[id] += 1;
-        return;
-    }
-    int m = (l + r) / 2;
-    update(id * 2, l, m, pos);
-    update(id * 2 + 1, m + 1, r, pos);
-    st[id] = st[id * 2] + st[id * 2 + 1];
-}
-
-int get(int id, int l, int r, int k){
-    if(k > st[id]) return -1;
-    if(l == r) return r;
-    int m = (l + r) / 2;
-    if(st[id * 2] >= k){
-        return get(id * 2, l, m, k);
-    }
-    else{
-        return get(id * 2 + 1, m + 1, r, k - st[id * 2]);
-    }
-}
-
-void initRight(int left){
-    for(int i = 1; i <= n; i++){
-        right[i] = mp(1e9, i);
-    }
-    for(int i = 1; i <= n; i++){
-        int pos = left;
-        for(int j = 0; j < t[i].size(); j++){
-            int c = t[i][j] - 'a';
-            // jump to optimize complexity
-            pos = next[pos][c];
-            if(pos >= s.size()) break;
-            if(j == t[i].size() - 1){
-                //Got enough i-th dictionary
-                right[i] = mp(pos, i);
-            }
-            pos += 1;
+void update(int pos){
+    int id = 1, l = 1, r = n;
+    while(l < r){
+        int m = (l + r) >> 1;
+        if(pos <= m){
+            id = id << 1;
+            r = m;
+        }
+        else{
+            id = id << 1 | 1;
+            l = m + 1;
         }
     }
-    sort(right + 1, right + n + 1);
+    st[id] += 1;
+    while(id > 1){
+        id = id >> 1;
+        st[id] = st[id << 1] + st[id << 1 | 1];
+    }
 }
 
-void solve(){
+III Stack[100];
+int get(int k){
+    int i = 1;
+    Stack[i] = mp(1, mp(1, n));
+    while(i){
+        int id = Stack[i].fi, l = Stack[i].se.fi, r = Stack[i].se.se;
+        i--;
+        if(k > st[id]) return -1;
+        if(l == r) return l;
+        int m = (l + r) >> 1;
+        if(k <= st[id << 1]){
+            i++;
+            Stack[i] = mp(id << 1, mp(l, m));
+        }
+        else{
+            i++;
+            Stack[i] = mp(id << 1 | 1, mp(m + 1, r));
+            k -= st[id << 1];
+        }
+    }
+}
+
+void initEnd(int u){
+    for(int i = 1; i <= n; i++){
+        ed[i] = mp(len + 1, i);
+        int check = 1;
+        int p = u;
+        for(int j = 0; j < t[i].size(); j++){
+            while(p <= len && s[p] != t[i][j]) p++;
+            if(p > len) check = 0;
+            p++;
+        }
+        if(check) ed[i] = mp(p - 1, i);
+    }
+}
+
+int main(){
+    ios_base::sync_with_stdio(0); cin.tie(0);
     cin >> s;
-    cin >> n >> query;
+    len = s.size();
+    s = '@' + s;
+    cin >> n >> Q;
     for(int i = 1; i <= n; i++){
         cin >> t[i];
     }
+    for(int i = 1; i <= Q; i++){
+        int u, v, k;
+        cin >> u >> v >> k;
+        fr[u].pb(mp(v, mp(k, i)));
+    }
+
     sort(t + 1, t + n + 1);
-    for(int i = 1; i <= query; i++){
-        int l, r, k;
-        cin >> l >> r >> k;
-        l -= 1, r -= 1;
-        q[l].pb(mp(r, mp(k, i))); // Offline process
-    }
-
-    for(int i = 0; i < s.size() + 5; i++){
-        for(int j = 0; j <= 25; j++){
-            next[i][j] = 1e9;
-        }
-    }
-    for(int i = s.size() - 1; i >= 0; i--){
-        for(char c = 'a'; c <= 'z'; c++){
-            if(s[i] == c){
-                next[i][c - 'a'] = i;
-            }
-            else{
-                next[i][c - 'a'] = next[i + 1][c - 'a'];
-            }
-        }
-    }
-
-    for(int l = 0; l < s.size(); l++){
-        if(q[l].size() == 0) continue;
-        sort(q[l].begin(), q[l].end());
-        initRight(l);
+    for(int u = 1; u <= len; u++){
+        sort(fr[u].begin(), fr[u].end());
+        initEnd(u);
+        sort(ed + 1, ed + n + 1);
         initST();
-
-        int id = 1;
-        for(auto it: q[l]){
-            int r = it.fi, k = it.se.fi, i = it.se.se;
-
-            while(id <= n && r >= right[id].fi){
-                update(1, 1, n, right[id].se);
-                id += 1;
+        int j = 1;
+        for(auto it: fr[u]){
+            int v = it.fi, k = it.se.fi, pos = it.se.se;
+            while(j <= n && ed[j].fi <= v){
+                update(ed[j].se);
+                j++;
             }
-            res[i] = get(1, 1, n, k);
+            res[pos] = get(k);
         }
     }
 
-    for(int i = 1; i <= query; i++){
+    for(int i = 1; i <= Q; i++){
         if(res[i] == -1){
             cout << "NO SUCH WORD" << '\n';
-            continue;
         }
-        string ans = t[res[i]];
-        if(ans.size() > 10) ans = ans.substr(0, 10);
-        cout << ans << '\n';
+        else{
+            for(int j = 0; j < min((int)t[res[i]].size(), 10); j++){
+                cout << t[res[i]][j];
+            }
+            cout << '\n';
+        }
     }
-}
-
-int32_t main(){
-    ios_base::sync_with_stdio(0); cin.tie(0);
-    //int T; cin >> T; while(T--)
-    solve();
 }
