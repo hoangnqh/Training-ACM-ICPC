@@ -40,7 +40,12 @@
 
 [Code](https://github.com/nqhhoang2002/Training-ACM-ICPC/tree/master/IEEEXtreme%2015.0)
 
-## 2021 - 2022 ICPC training round 1
+## UET 2021 - 2022 ICPC training round 1
 [Link contest](https://ueticpc.contest.codeforces.com/group/Sfs2KQampo/contest/354030)
 
-[Code](https://github.com/nqhhoang2002/Training-ACM-ICPC/tree/master/2021%20-%202022%20ICPC%20training%20round%201)
+[Code](https://github.com/nqhhoang2002/Training-ACM-ICPC/tree/master/UET%202021%20-%202022%20ICPC%20training%20round%201)
+
+## VNOI ICPC Practice Contest 2021
+[Link contest](https://oj.vnoi.info/contest/icpc21_beta)
+
+[Code](https://github.com/nqhhoang2002/Training-ACM-ICPC/tree/master/VNOI%20ICPC%20Practice%20Contest%202021)
