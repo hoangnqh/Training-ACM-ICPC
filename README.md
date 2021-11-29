@@ -49,3 +49,8 @@
 [Link contest](https://oj.vnoi.info/contest/icpc21_beta)
 
 [Code](https://github.com/nqhhoang2002/Training-ACM-ICPC/tree/master/VNOI%20ICPC%20Practice%20Contest%202021)
+
+## UET 2021 - 2022 ICPC training round 2
+[Link contest](https://ueticpc.contest.codeforces.com/group/Sfs2KQampo/contest/357047)
+
+[Code](https://github.com/nqhhoang2002/Training-ACM-ICPC/tree/master/UET%202021%20-%202022%20ICPC%20training%20round%202)
