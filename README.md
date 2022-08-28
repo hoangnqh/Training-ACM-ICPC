@@ -7,6 +7,8 @@
 
 ## Team achievements
 1. Consolation Prize, ICPC 2020 Vietnam National
+2. Ranked 78 in the IEEEXtreme 15.0 programming competition (+12,900 participants)
+3. Third Prize, ICPC 2021 Vietnam National
 
 ## The 2020 ICPC Asia Can Tho Regional Contest
 [Link contest](https://open.kattis.com/problem-sources/The%202020%20ICPC%20Asia%20Can%20Tho%20Regional%20Contest)
